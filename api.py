@@ -40,10 +40,21 @@ def get_products():
 
     try:
         cursor = conn.cursor()
-        products = cursor.execute(
-            f'SELECT * FROM {TABLE_NAME} LIMIT ? OFFSET ?',
-            (per_page, offset)
-        ).fetchall()
+        products = cursor.execute('''
+            SELECT 
+                p.id,
+                p.cost,
+                p.category,
+                p.name,
+                p.brand,
+                p.retail_price,
+                d.name as department_name,
+                p.sku,
+                p.distribution_center_id
+            FROM products p 
+            LEFT JOIN departments d ON p.department_id = d.id 
+            LIMIT ? OFFSET ?
+        ''', (per_page, offset)).fetchall()
         product_list = [dict(row) for row in products]
         return jsonify(product_list)
     except sqlite3.OperationalError as e:
@@ -62,9 +73,21 @@ def get_product(product_id):
 
     try:
         cursor = conn.cursor()
-        product = cursor.execute(
-            f'SELECT * FROM {TABLE_NAME} WHERE id = ?', (product_id,)
-        ).fetchone()
+        product = cursor.execute('''
+            SELECT 
+                p.id,
+                p.cost,
+                p.category,
+                p.name,
+                p.brand,
+                p.retail_price,
+                d.name as department_name,
+                p.sku,
+                p.distribution_center_id
+            FROM products p 
+            LEFT JOIN departments d ON p.department_id = d.id 
+            WHERE p.id = ?
+        ''', (product_id,)).fetchone()
 
         if product is None:
             return jsonify({'error': 'Product not found'}), 404
