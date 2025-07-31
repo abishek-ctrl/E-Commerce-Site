@@ -6,3 +6,4 @@ data/distribution_centers.csv
 data/archive.zip
 data/.DS_Store
 file.ipynb
+.gitignore
