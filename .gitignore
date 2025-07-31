@@ -1,0 +1,8 @@
+data/users.csv
+data/orders.csv
+data/order_items.csv
+data/inventory_items.csv
+data/distribution_centers.csv
+data/archive.zip
+data/.DS_Store
+file.ipynb
