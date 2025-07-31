@@ -56,6 +56,12 @@ const ProductListPage = () => {
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800">Ecommerce Site</h1>
         <p className="text-gray-600 mt-2">Discover Amazing Products</p>
+        <Link 
+          to="/departments" 
+          className="inline-block mt-4 text-blue-500 hover:text-blue-600"
+        >
+          Browse by Department
+        </Link>
       </header>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {products.map((product) => (
@@ -75,20 +81,22 @@ const ProductListPage = () => {
           </Link>
         ))}
       </div>
-      <div className="mt-8 flex justify-center gap-4">
+      <div className="mt-8 flex justify-center gap-2">
         <button
           onClick={() => setPage(p => Math.max(1, p - 1))}
           disabled={page === 1}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 font-medium"
+          className="inline-flex items-center px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
           Previous
         </button>
         <button
           onClick={() => setPage(p => p + 1)}
           disabled={products.length < 15}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 hover:bg-blue-600 font-medium"
+          className="inline-flex items-center px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Next
+          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
       </div>
     </div>
